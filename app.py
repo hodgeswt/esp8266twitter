@@ -12,7 +12,7 @@ class PostTweet(object):
 	
 	@cherrypy.expose
 	def post_tweet(self, password="fail", maker_key="fail"):
-		if bcrypt.checkpw(password.encode('utf8'), hash):
+		if bcrypt.checkpw(password.encode('utf8'), hash.encode('utf8')):
 			thestr = 'https://maker.ifttt.com/trigger/button_pressed/with/key/'
 			with_key = thestr + maker_key
 			r = requests.post(thestr+maker_key)
