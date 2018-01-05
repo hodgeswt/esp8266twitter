@@ -1,6 +1,7 @@
 import cherrypy
 from passlib.hash import pbkdf2_sha256
 import requests
+import os
 
 hash = pbkdf2_sha256.encrypt("VerySecretPassword")
 
@@ -19,5 +20,8 @@ class PostTweet(object):
 		else:
 			return "<h1>Go away, failure!</h1>"
 		
-if __name__ == '__main__':
-	cherrypy.quickstart(PostTweet())
+cherrypy.config.update({'server.socket_host': '0.0.0.0',})
+cherrypy.config.update({'server.socket_port': int(os.environ.get('PORT', '5000')),})
+cherrypy.quickstart(PostTweet())
+	
+	
