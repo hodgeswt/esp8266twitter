@@ -17,8 +17,8 @@ class PostTweet(object):
 			<p>Triggers a Maker Event that posts a tweet on @willsesp8266</p>
 			<br />
 			<form method="get" action="post_tweet">
-				<input type="text" value="password" name="password" />
-				<input type="text" value="maker key" name="maker_key" />
+				<input type="password" value="password" name="password" />
+				<input type="password" value="maker key" name="maker_key" />
 				<button type="submit">Post</button>
 			</form>
 		</body>
