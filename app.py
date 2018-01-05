@@ -1,9 +1,9 @@
 import cherrypy
-from passlib.hash import pbkdf2_sha256
+import bcrypt
 import requests
 import os
 
-hash = pbkdf2_sha256.encrypt("VerySecretPassword")
+hash = "$2b$12$6uw0MOUnw3RrmG4vxaba7.NKe9JQSZTQk4NuRNkg7UgYJLvqOhD4C"
 
 class PostTweet(object):
 	@cherrypy.expose
@@ -12,7 +12,7 @@ class PostTweet(object):
 	
 	@cherrypy.expose
 	def post_tweet(self, password="fail", maker_key="fail"):
-		if pbkdf2_sha256.verify(password, hash):
+		if bcrypt.checkpw(password.encode('utf8'), hash):
 			thestr = 'https://maker.ifttt.com/trigger/button_pressed/with/key/'
 			with_key = thestr + maker_key
 			r = requests.post(thestr+maker_key)
